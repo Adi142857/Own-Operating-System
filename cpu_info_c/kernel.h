@@ -1,12 +1,17 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-#include "types.h"
+typedef unsigned char uint8;
+typedef unsigned short uint16;
+typedef unsigned int uint32;
+
 
 #define VGA_ADDRESS 0xB8000
 #define BUFSIZE 2200
 
 uint16* vga_buffer;
+
+#define NULL 0
 
 enum vga_color {
     BLACK,
@@ -26,11 +31,5 @@ enum vga_color {
     YELLOW,
     WHITE,
 };
-
-extern void print_new_line();
-extern void print_char(char);
-extern void print_string(char *);
-extern void print_int(int);
-
 
 #endif

@@ -3,10 +3,18 @@
 
 #include "types.h"
 
+#define NULL 0
+
 #define VGA_ADDRESS 0xB8000
 #define BUFSIZE 2200
 
 uint16* vga_buffer;
+
+#define BOX_MAX_WIDTH 78
+#define BOX_MAX_HEIGHT 23
+
+#define BOX_SINGLELINE 1
+#define BOX_DOUBLELINE 2
 
 enum vga_color {
     BLACK,
@@ -26,11 +34,6 @@ enum vga_color {
     YELLOW,
     WHITE,
 };
-
-extern void print_new_line();
-extern void print_char(char);
-extern void print_string(char *);
-extern void print_int(int);
 
 
 #endif

@@ -14,3 +14,4 @@ load_gdt:
 	jmp $0x8, $.long_jump
 .long_jump:
 	ret
+

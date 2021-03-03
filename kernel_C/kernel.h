@@ -8,6 +8,8 @@
 
 uint16* vga_buffer;
 
+#define NULL 0
+
 enum vga_color {
     BLACK,
     BLUE,
@@ -26,11 +28,5 @@ enum vga_color {
     YELLOW,
     WHITE,
 };
-
-extern void print_new_line();
-extern void print_char(char);
-extern void print_string(char *);
-extern void print_int(int);
-
 
 #endif

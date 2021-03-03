@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#define NULL 0
+
 #define VGA_ADDRESS 0xB8000
 #define BUFSIZE 2200
 
@@ -26,11 +28,6 @@ enum vga_color {
     YELLOW,
     WHITE,
 };
-
-extern void print_new_line();
-extern void print_char(char);
-extern void print_string(char *);
-extern void print_int(int);
 
 
 #endif

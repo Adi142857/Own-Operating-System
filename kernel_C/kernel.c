@@ -1,8 +1,6 @@
 #include "kernel.h"
-#include "util.h"
 #include "types.h"
 #include "gdt.h"
-#include "idt.h"
 
 //index for video buffer array
 uint32 vga_index;
@@ -78,15 +76,52 @@ void print_char(char ch)
   vga_index++;
 }
 
+
+uint32 strlen(const char* str)
+{
+  uint32 length = 0;
+  while(str[length])
+    length++;
+  return length;
+}
+
+uint32 digit_count(int num)
+{
+  uint32 count = 0;
+  if(num == 0)
+    return 1;
+  while(num > 0){
+    count++;
+    num = num/10;
+  }
+  return count;
+}
+
+void itoa(int num, char *number)
+{
+  int dgcount = digit_count(num);
+  int index = dgcount - 1;
+  char x;
+  if(num == 0 && dgcount == 1){
+    number[0] = '0';
+    number[1] = '\0';
+  }else{
+    while(num != 0){
+      x = num % 10;
+      number[index] = x + '0';
+      index--;
+      num = num / 10;
+    }
+    number[dgcount] = '\0';
+  }
+}
+
 //print string by calling print_char
 void print_string(char *str)
 {
   uint32 index = 0;
   while(str[index]){
-    if(str[index] == '\n')
-      print_new_line();
-    else
-      print_char(str[index]);
+    print_char(str[index]);
     index++;
   }
 }
@@ -104,28 +139,11 @@ void print_int(int num)
 void kernel_entry()
 {
   init_gdt();
-  init_idt();
 
+  //first init vga with fore & back colors
   init_vga(WHITE, BLACK);
 
-  // set values to registers and raise an interrupt with number
-  asm volatile("\tmov $12345, %eax");
-  asm volatile("\tint $0");
-  asm volatile("\tint $1");
-  asm volatile("\tint $2");
-  asm volatile("\tint $3");
-  asm volatile("\tint $4");
-  asm volatile("\tint $5");
-  asm volatile("\tint $6");
-  asm volatile("\tint $7");
-  asm volatile("\tint $8");
-  asm volatile("\tint $9");
-  asm volatile("\tint $10");
-  asm volatile("\tint $11");
-  asm volatile("\tint $12");
-  asm volatile("\tint $13");
-  asm volatile("\tint $14");
-  asm volatile("\tint $15");
+  print_string("Hello World!");
 
 }
 
